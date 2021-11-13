@@ -1,0 +1,45 @@
+<!doctype html>
+{% load crispy_forms_tags %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Download Image</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h1 class="mt-2">Hand written text recognition</h1>
+          <hr class="mt-0 mb-4">
+          <a href="/process_image" class="btn btn-dark float-right">Upload new image</a>
+
+          <br>
+          <br>
+            <form method="POST" action="/process_image" enctype='multipart/form-data' >
+              {% csrf_token %}
+              {{ form|crispy }}
+              <a href="/download" download  class="btn btn-success float-right">Download</a>
+
+            </form>
+        </div>
+      </div>
+    </div>
+  <script>
+       function submitText() {
+            var textVal = document.getElementById("txtarea").value;
+
+            textVal = textVal.split('\n');
+
+            if (textVal.length > 0) {
+                for (const element of textVal) {
+                    console.log(element);
+                    window.open(element, "_blank");
+                }
+
+            }
+      }
+  </script>
+  </body>
+</html>
